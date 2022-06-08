@@ -1,4 +1,4 @@
-var kelurahan = {
+var dataKecamatan = {
   "type": "FeatureCollection",
   "name": "tes1",
   "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
@@ -7,16 +7,16 @@ var kelurahan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Bojonegoro",
-        "Kecamatan": "Sumodikaran",
+        "Kabupaten": "Surabaya",
+        "Kecamatan": "Mulyorejo",
         "Kategori" : "Bencana",
-        "Jumlah": 92
+        "Jumlah": 3
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          111.85455322265625,
-          -7.198319490613502
+          112.78289794921875,
+          -7.271546174908103
         ]
       }
     },
@@ -24,16 +24,34 @@ var kelurahan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Bojonegoro",
-        "Kecamatan": "Cancung",
+        "Kabupaten": "Surabaya",
+        "Kecamatan": "Wonorejo",
         "Kategori": "Kriminalitas",
-        "Jumlah": 3
+        "Jumlah": 40
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          111.8353271484375,
-          -7.316838572467191
+          112.73345947265625,
+          -7.271205613225013
+        ]
+      }
+    },
+    
+    {
+      "type": "Feature",
+      "properties": {
+        "Provinsi": "Jawa Timur",
+        "Kabupaten": "Jember",
+        "Kecamatan": "Mumbulsari",
+        "Kategori": "Bencana",
+        "Jumlah": 106
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.75518798828125,
+          -8.27859570425194
         ]
       }
     },
@@ -44,13 +62,13 @@ var kelurahan = {
         "Kabupaten": "Jember",
         "Kecamatan": "Mumbulsari",
         "Kategori": "Kriminalitas",
-        "Jumlah": 84
+        "Jumlah": 4
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.75518798828125,
-          -8.285560419445781
+          113.74883651733397,
+          -8.282163012795495
         ]
       }
     },
@@ -59,36 +77,108 @@ var kelurahan = {
       "properties": {
         "Provinsi": "Jawa Timur",
         "Kabupaten": "Jember",
-        "Kecamatan": "Kaliwining",
-        "Kategori": "Bencana",
-        "Jumlah": 43
+        "Kecamatan": "Mumbulsari",
+        "Kategori": "Kesehatan",
+        "Jumlah": 82
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.62884521484375,
-          -8.24207140288243
+          113.74883651733397,
+          -8.291675677480157
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "Kecamatan": "Karanganyar",
+        "Provinsi": "Jawa Timur",
+        "Kabupaten": "Jember",
+        "Kecamatan": "Mumbulsari",
+        "Kategori": "Ekonomi",
+        "Jumlah": 203
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.75518798828125,
+          -8.294223673591787
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Provinsi": "Jawa Timur",
+        "Kabupaten": "Jember",
+        "Kecamatan": "Mumbulsari",
+        "Kategori": "Olahraga",
+        "Jumlah": 86
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.7608528137207,
+          -8.290316739468043
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Provinsi": "Jawa Timur",
+        "Kabupaten": "Jember",
+        "Kecamatan": "Mumbulsari",
+        "Kategori": "Kecelakaan",
+        "Jumlah": 20
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.76136779785156,
+          -8.280973913539283
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Provinsi": "Jawa Timur",
+        "Kabupaten": "Jember",
+        "Kecamatan": "Ambulu",
+        "Kategori": "Bencana",
+        "Jumlah": 86
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.60601425170898,
+          -8.342037998042212
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Provinsi": "Jawa Timur",
+        "Kabupaten": "Malang",
+        "Kecamatan": "Sukoanyar",
         "Kategori": "Bencana",
         "Jumlah": 187
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          109.2037582397461,
-          -7.453028495460379
+          112.73577690124512,
+          -7.979337750887141
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "Provinsi": "Jawa Tengah",
+        "Kabupaten": "Tegal",
         "Kecamatan": "Kalikidang",
         "Kategori": "Bencana",
         "Jumlah": 12
@@ -104,210 +194,51 @@ var kelurahan = {
     {
       "type": "Feature",
       "properties": {
-        "Kecamatan": "Mangunharjo",
+        "Provinsi": "Jawa Tengah",
+        "Kabupaten": "Semarang",
+        "Kecamatan": "Petompon",
+        "Kategori": "Bencana",
+        "Jumlah": 88
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.40435791015625,
+          -7.00140063335305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Provinsi": "Jawa Barat",
+        "Kabupaten": "Bandung",
+        "Kecamatan": "Karasak",
         "Kategori": "Kriminalitas",
         "Jumlah": 77
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          109.91992950439453,
-          -6.999356052941969
+          107.61331558227539,
+          -6.9540322251573325
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "Kecamatan": "Pecalungan",
+        "Provinsi": "DKI Jakarta",
+        "Kabupaten": "Jakarta Pusat",
+        "Kecamatan": "Senen",
         "Kategori": "Kriminalitas",
         "Jumlah": 126
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          109.87083435058594,
-          -7.017075451972578
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Jakarta",
-        "Kategori": "Ekonomi",
-        "Jumlah": 2
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          106.82865142822264,
-          -6.176054301961396
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Jakarta",
-        "Kategori": "Olahraga",
-        "Jumlah": 20
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          106.82871848344803,
-          -6.176054301961396
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Yogyakarta",
-        "Kategori": "Kriminalitas",
-        "Jumlah": 1
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          110.3741455078125,
-          -7.8048814328181235
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Serang",
-        "Kategori": "Kriminalitas",
-        "Jumlah": 10
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          106.15814208984374,
-          -6.124169589851178
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Pandeglang",
-        "Kategori": "Kesehatan",
-        "Jumlah": 10
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          106.10870361328125,
-          -6.313933579167068
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Bandung",
-        "Kategori": "Olahraga",
-        "Jumlah": 10
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          107.60009765625,
-          -6.931879889517204
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Tasikmalaya",
-        "Kategori": "Bencana",
-        "Jumlah": 2
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          108.21533203125,
-          -7.324330105676168
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Semarang",
-        "Kategori": "Kriminalitas",
-        "Jumlah": 19
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          110.42358398437499,
-          -7.0245719178463695
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Temanggung",
-        "Kategori": "Kesehatan",
-        "Jumlah": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          110.17913818359375,
-          -7.324330105676168
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Malang",
-        "Kategori": "Bencana",
-        "Jumlah": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          110.17913818359375,
-          -7.324330105676168
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Batu",
-        "Kategori": "Ekonomi",
-        "Jumlah": 1
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          112.64007568359375,
-          -7.985797676445874
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Kecamatan": "Sukomanunggal",
-        "Kategori": "Bencana",
-        "Jumlah": 70
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          112.69775390625,
-          -7.262180634548381
+          106.83920860290526,
+          -6.176566296883744
         ]
       }
     }

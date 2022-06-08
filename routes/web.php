@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pane');
 });
+
+Route::get('/nopane', function () {
+    return view('nopane');
+});

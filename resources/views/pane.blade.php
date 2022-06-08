@@ -61,7 +61,7 @@
     // }).addTo(map);
 
     var tiles = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 12,
+        maxZoom: 15,
         minZoom: 6,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     }).addTo(map);
@@ -98,6 +98,78 @@
     });
     const kriminalT = L.icon({
         iconUrl: "{{ asset('icons/kriminal_t.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const kesehatanT = L.icon({
+        iconUrl: "{{ asset('icons/kesehatan_t.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const kesehatanS = L.icon({
+        iconUrl: "{{ asset('icons/kesehatan_s.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const kesehatanP = L.icon({
+        iconUrl: "{{ asset('icons/kesehatan_p.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const ekonomiT = L.icon({
+        iconUrl: "{{ asset('icons/ekonomi_t.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const ekonomiS = L.icon({
+        iconUrl: "{{ asset('icons/ekonomi_s.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const ekonomiP = L.icon({
+        iconUrl: "{{ asset('icons/ekonomi_p.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const olahragaT = L.icon({
+        iconUrl: "{{ asset('icons/olahraga_t.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const olahragaS = L.icon({
+        iconUrl: "{{ asset('icons/olahraga_s.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const olahragaP = L.icon({
+        iconUrl: "{{ asset('icons/olahraga_p.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const kecelakaanT = L.icon({
+        iconUrl: "{{ asset('icons/kecelakaan_t.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const kecelakaanS = L.icon({
+        iconUrl: "{{ asset('icons/kecelakaan_s.png')}}",
+        iconSize: [40, 40], // size of the icon
+        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
+    });
+    const kecelakaanP = L.icon({
+        iconUrl: "{{ asset('icons/kecelakaan_p.png')}}",
         iconSize: [40, 40], // size of the icon
         iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
@@ -193,6 +265,54 @@
             } else if (feature.properties.Kategori == "Kriminalitas" && feature.properties.Jumlah > 100) {
                 icon = L.marker(latlng, {
                     icon: kriminalP
+                });
+            } else if (feature.properties.Kategori == "Kesehatan" && feature.properties.Jumlah < 50) {
+                icon = L.marker(latlng, {
+                    icon: kesehatanT
+                });
+            } else if (feature.properties.Kategori == "Kesehatan" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
+                icon = L.marker(latlng, {
+                    icon: kesehatanS
+                });
+            } else if (feature.properties.Kategori == "Kesehatan" && feature.properties.Jumlah > 100) {
+                icon = L.marker(latlng, {
+                    icon: kesehatanP
+                });
+            } else if (feature.properties.Kategori == "Ekonomi" && feature.properties.Jumlah < 50) {
+                icon = L.marker(latlng, {
+                    icon: ekonomiT
+                });
+            } else if (feature.properties.Kategori == "Ekonomi" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
+                icon = L.marker(latlng, {
+                    icon: ekonomiS
+                });
+            } else if (feature.properties.Kategori == "Ekonomi" && feature.properties.Jumlah > 100) {
+                icon = L.marker(latlng, {
+                    icon: ekonomiP
+                });
+            } else if (feature.properties.Kategori == "Olahraga" && feature.properties.Jumlah < 50) {
+                icon = L.marker(latlng, {
+                    icon: olahragaT
+                });
+            } else if (feature.properties.Kategori == "Olahraga" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
+                icon = L.marker(latlng, {
+                    icon: olahragaS
+                });
+            } else if (feature.properties.Kategori == "Olahraga" && feature.properties.Jumlah > 100) {
+                icon = L.marker(latlng, {
+                    icon: olahragaP
+                });
+            } else if (feature.properties.Kategori == "Kecelakaan" && feature.properties.Jumlah < 50) {
+                icon = L.marker(latlng, {
+                    icon: kecelakaanT
+                });
+            } else if (feature.properties.Kategori == "Kecelakaan" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
+                icon = L.marker(latlng, {
+                    icon: kecelakaanS
+                });
+            } else if (feature.properties.Kategori == "Kecelakaan" && feature.properties.Jumlah > 100) {
+                icon = L.marker(latlng, {
+                    icon: kecelakaanP
                 });
             }
 
@@ -325,7 +445,7 @@
 
     function zoomToFeature2(e) {
         map.fitBounds(e.target.getBounds(), {
-            maxZoom: 12
+            maxZoom: 15
         });
         toggleLayerVisibility2(map, e.target);
     }
