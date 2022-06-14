@@ -37,7 +37,6 @@ var dataKecamatan = {
         ]
       }
     },
-    
     {
       "type": "Feature",
       "properties": {

@@ -315,8 +315,6 @@
                     icon: kecelakaanP
                 });
             }
-
-
             return icon
         },
         style: {
