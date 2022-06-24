@@ -6,9 +6,8 @@ var dataProvinsi = {
     {
       "type": "Feature",
       "properties": {
-        "Provinsi": "Jawa Timur",
-        "Kategori" : "Bencana",
-        "Jumlah": 92
+        "Provinsi": "Jawa Timur"
+        
       },
       "geometry": {
         "type": "Point",
@@ -21,9 +20,7 @@ var dataProvinsi = {
     {
       "type": "Feature",
       "properties": {
-        "Provinsi": "Jawa Tengah",
-        "Kategori": "Kriminalitas",
-        "Jumlah": 3
+        "Provinsi": "Jawa Tengah"
       },
       "geometry": {
         "type": "Point",
@@ -36,9 +33,8 @@ var dataProvinsi = {
     {
       "type": "Feature",
       "properties": {
-        "Provinsi": "Jawa Barat",
-        "Kategori": "Kriminalitas",
-        "Jumlah": 84
+        "Provinsi": "Jawa Barat"
+        
       },
       "geometry": {
         "type": "Point",
@@ -51,8 +47,7 @@ var dataProvinsi = {
     {
       "type": "Feature",
       "properties": {
-        "Provinsi": "DKI Jakarta",
-        "Jumlah": 84
+        "Provinsi": "DKI Jakarta"
       },
       "geometry": {
         "type": "Point",

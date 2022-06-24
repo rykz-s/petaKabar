@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PetaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ Route::get('/', function () {
     return view('pane');
 });
 
-Route::get('/nopane', function () {
-    return view('nopane');
-});
+// Route::get('/nopane', function () {
+//     return view('nopane');
+// });
+
+Route::get('/nopane', [PetaController::class, 'index']);

@@ -9,19 +9,27 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
     <link rel="stylesheet" href="{{ asset('leaflet/css/MarkerCluster.css')}}">
     <link rel="stylesheet" href="{{ asset('leaflet/css/MarkerCluster.Default.css')}}">
+    <link rel="stylesheet" href="{{ asset('leaflet/css/style.css')}}">
+
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <style>
+    <!-- <style>
         #map {
             height: 950px;
             width: 100%;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
-    <div id="map"></div>
+
+    <div id="map" style="width: 100%;">
+        <button id="refreshButton">
+            Scrap!
+        </button>
+    </div>
+
 </body>
 
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/"></script>
@@ -169,6 +177,9 @@
         popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
     });
 
+    var dataApi = {!! json_encode($response) !!}
+    console.log(dataApi);
+
     let kabupaten = [],
         provinsi = [];
 
@@ -258,6 +269,7 @@
         onEachFeature: onEachFeature3
     });
 
+
     var markersKecamatan = new L.FeatureGroup();
     markersKecamatan.addLayer(geojson3);
 
@@ -280,6 +292,7 @@
         },
         onEachFeature: onEachFeature
     }).addTo(map);
+
     var markersProvinsi = new L.FeatureGroup();
     markersProvinsi.addLayer(geojson);
 
@@ -310,154 +323,179 @@
     });
 
     function hitungKabupaten(feature) {
-        let kategori = feature.properties.Kategori;
-        let jumlah = feature.properties.Jumlah;
-        if (kabupaten.filter(kab => kab?.name == feature.properties.Kabupaten).length == 0) {
-            let bencana = 0,
-                kriminalitas = 0,
-                kesehatan = 0,
-                ekonomi = 0,
-                olahraga = 0,
-                kecelakaan = 0;
-            if (kategori == "Bencana") {
-                bencana += jumlah;
-            } else if (kategori == "Kriminalitas") {
-                kriminalitas += jumlah;
-            } else if (kategori == "Kesehatan") {
-                kesehatan += jumlah;
-            } else if (kategori == "Ekonomi") {
-                ekonomi += jumlah;
-            } else if (kategori == "Olahraga") {
-                olahraga += jumlah;
-            } else if (kategori == "Kecelakaan") {
-                kecelakaan += jumlah;
-            }
-            let kab = {
-                name: feature.properties.Kabupaten,
-                bencana: bencana,
-                kriminalitas: kriminalitas,
-                kesehatan: kesehatan,
-                ekonomi: ekonomi,
-                olahraga: olahraga,
-                kecelakaan: kecelakaan
-            };
-            kabupaten.push(kab);
-        } else {
-            let idx = kabupaten.findIndex(kab => kab.name == feature.properties.Kabupaten);
-            if (kategori == "Bencana") {
-                kabupaten[idx].bencana += jumlah;
-            } else if (kategori == "Kriminalitas") {
-                kabupaten[idx].kriminalitas += jumlah;
-            } else if (kategori == "Kesehatan") {
-                kabupaten[idx].kesehatan += jumlah;
-            } else if (kategori == "Ekonomi") {
-                kabupaten[idx].ekonomi += jumlah;
-            } else if (kategori == "Olahraga") {
-                kabupaten[idx].olahraga += jumlah;
-            } else if (kategori == "Kecelakaan") {
-                kabupaten[idx].kecelakaan += jumlah;
-            }
+        const kabupatens = dataApi.filter(k => k?.kabupaten.toLowerCase() == feature.properties.Kabupaten.toLowerCase())
+      let bencana = 0,
+          kriminalitas = 0,
+          kesehatan = 0,
+          ekonomi = 0,
+          olahraga = 0,
+          kecelakaan = 0;
+      kabupatens.forEach(k => {
+        if (k.kategori.toLowerCase() == "bencana") {
+            bencana += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kriminalitas") {
+            kriminalitas += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kesehatan") {
+            kesehatan += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "ekonomi") {
+            ekonomi += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "olahraga") {
+            olahraga += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kecelakaan") {
+            kecelakaan += k.tingkat_keparahan;
         }
+      })
+      return {
+        bencana: bencana,
+        kriminalitas: kriminalitas,
+        kesehatan: kesehatan,
+        ekonomi: ekonomi,
+        olahraga: olahraga,
+        kecelakaan: kecelakaan
+      };
     }
 
     function hitungProvinsi(feature) {
-        let kategori = feature.properties.Kategori;
-        let jumlah = feature.properties.Jumlah;
-        if (provinsi.filter(prov => prov?.name == feature.properties.Provinsi).length == 0) {
-            let bencana = 0,
-                kriminalitas = 0,
-                kesehatan = 0,
-                ekonomi = 0,
-                olahraga = 0,
-                kecelakaan = 0;
-            if (kategori == "Bencana") {
-                bencana += jumlah;
-            } else if (kategori == "Kriminalitas") {
-                kriminalitas += jumlah;
-            } else if (kategori == "Kesehatan") {
-                kesehatan += jumlah;
-            } else if (kategori == "Ekonomi") {
-                ekonomi += jumlah;
-            } else if (kategori == "Olahraga") {
-                olahraga += jumlah;
-            } else if (kategori == "Kecelakaan") {
-                kecelakaan += jumlah;
-            }
-            let prov = {
-                name: feature.properties.Provinsi,
-                bencana: bencana,
-                kriminalitas: kriminalitas,
-                kesehatan: kesehatan,
-                ekonomi: ekonomi,
-                olahraga: olahraga,
-                kecelakaan: kecelakaan
-            };
-            provinsi.push(prov);
-        } else {
-            let idx = provinsi.findIndex(prov => prov.name == feature.properties.Provinsi);
-            if (kategori == "Bencana") {
-                provinsi[idx].bencana += jumlah;
-            } else if (kategori == "Kriminalitas") {
-                provinsi[idx].kriminalitas += jumlah;
-            } else if (kategori == "Kesehatan") {
-                provinsi[idx].kesehatan += jumlah;
-            } else if (kategori == "Ekonomi") {
-                provinsi[idx].ekonomi += jumlah;
-            } else if (kategori == "Olahraga") {
-                provinsi[idx].olahraga += jumlah;
-            } else if (kategori == "Kecelakaan") {
-                provinsi[idx].kecelakaan += jumlah;
-            }
+        const provinsis = dataApi.filter(p => p?.provinsi.toLowerCase() == feature.properties.Provinsi.toLowerCase())
+      let bencana = 0,
+          kriminalitas = 0,
+          kesehatan = 0,
+          ekonomi = 0,
+          olahraga = 0,
+          kecelakaan = 0;
+      provinsis.forEach(k => {
+        if (k.kategori.toLowerCase() == "bencana") {
+            bencana += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kriminalitas") {
+            kriminalitas += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kesehatan") {
+            kesehatan += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "ekonomi") {
+            ekonomi += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "olahraga") {
+            olahraga += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kecelakaan") {
+            kecelakaan += k.tingkat_keparahan;
         }
+      })
+      return {
+        bencana: bencana,
+        kriminalitas: kriminalitas,
+        kesehatan: kesehatan,
+        ekonomi: ekonomi,
+        olahraga: olahraga,
+        kecelakaan: kecelakaan
+      };
+    }
+
+    function hitungKecamatan(feature){
+      const kecamatans = dataApi.filter(k => k?.kecamatan.toLowerCase() == feature.properties.Kecamatan.toLowerCase())
+      let bencana = 0,
+          kriminalitas = 0,
+          kesehatan = 0,
+          ekonomi = 0,
+          olahraga = 0,
+          kecelakaan = 0;
+      kecamatans.forEach(k => {
+        if (k.kategori.toLowerCase() == "bencana") {
+            bencana += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kriminalitas") {
+            kriminalitas += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kesehatan") {
+            kesehatan += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "ekonomi") {
+            ekonomi += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "olahraga") {
+            olahraga += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kecelakaan") {
+            kecelakaan += k.tingkat_keparahan;
+        }
+      })
+      return {
+        bencana: bencana,
+        kriminalitas: kriminalitas,
+        kesehatan: kesehatan,
+        ekonomi: ekonomi,
+        olahraga: olahraga,
+        kecelakaan: kecelakaan
+      };
     }
 
     function onEachFeature3(feature, layer) {
-        hitungKabupaten(feature);
-        hitungProvinsi(feature);
-        layer.bindPopup('Kecamatan : ' + feature.properties.Kecamatan + '<br>Kategori : ' + feature.properties.Kategori + '<br>Jumlah : ' + feature.properties.Jumlah);
+        // hitungKabupaten(feature);
+        // hitungProvinsi(feature);
+        var kecamatan = hitungKecamatan(feature)
+        let popUpText = 'Kecamatan : ' + feature.properties.Kecamatan;
+        if (kecamatan.bencana > 0) {
+          popUpText += ('<br>Kategori : Bencana' + '<br>Tingkat Keparahan : ' + kecamatan.bencana)
+        }
+        if (kecamatan.kriminalitas > 0) {
+          popUpText += ('<br>Kategori : Kriminalitas' + '<br>Tingkat Keparahan : ' + kecamatan.kriminalitas)
+        }
+        if (kecamatan.kesehatan > 0) {
+          popUpText += ('<br>Kategori : kesehatan' + '<br>Tingkat Keparahan : ' + kecamatan.kesehatan)
+        }
+        if (kecamatan.ekonomi > 0) {
+          popUpText += ('<br>Kategori : ekonomi' + '<br>Tingkat Keparahan : ' + kecamatan.ekonomi)
+        }
+        if (kecamatan.olahraga > 0) {
+          popUpText += ('<br>Kategori : olahraga' + '<br>Tingkat Keparahan : ' + kecamatan.olahraga)
+        }
+        if (kecamatan.kecelakaan > 0) {
+          popUpText += ('<br>Kategori : kecelakaan' + '<br>Tingkat Keparahan : ' + kecamatan.kecelakaan)
+        }
+        layer.bindPopup(popUpText);
     }
 
     console.log(geojson3);
     console.log(markersKecamatan);
 
     function onEachFeature2(feature, layer) {
-        const kab = kabupaten.filter(k => k?.name == feature.properties.Kabupaten)[0];
-        let bencana = 0,
-            kriminalitas = 0,
-            kesehatan = 0,
-            ekonomi = 0,
-            olahraga = 0,
-            kecelakaan = 0;
-        if (kab) {
-            bencana = kab.bencana;
-            kriminalitas = kab.kriminalitas;
-            kesehatan = kab.kesehatan;
-            ekonomi = kab.ekonomi;
-            olahraga = kab.olahraga;
-            kecelakaan = kab.kecelakaan;
+        var kabupaten = hitungKabupaten(feature)
+        let popUpText = 'Kabupaten/Kota : ' + feature.properties.Kabupaten;
+        if (kabupaten.bencana > 0) {
+          popUpText += ('<br>Kategori : Bencana' + '<br>Tingkat Keparahan : ' + kabupaten.bencana)
         }
-        layer.bindPopup('Kabupaten : ' + feature.properties.Kabupaten + '<br>Bencana : ' + kab.bencana + '<br>Kriminalitas : ' + kab.kriminalitas + '<br>Kesehatan : ' +
-            kab.kesehatan + '<br>Ekonomi : ' + kab.ekonomi + '<br>Olahraga : ' + kab.olahraga + '<br>Kecelakaan : ' + kab.kecelakaan);
+        if (kabupaten.kriminalitas > 0) {
+          popUpText += ('<br>Kategori : Kriminalitas' + '<br>Tingkat Keparahan : ' + kabupaten.kriminalitas)
+        }
+        if (kabupaten.kesehatan > 0) {
+          popUpText += ('<br>Kategori : kesehatan' + '<br>Tingkat Keparahan : ' + kabupaten.kesehatan)
+        }
+        if (kabupaten.ekonomi > 0) {
+          popUpText += ('<br>Kategori : Ekonomi' + '<br>Tingkat Keparahan : ' + kabupaten.ekonomi)
+        }
+        if (kabupaten.olahraga > 0) {
+          popUpText += ('<br>Kategori : Olahraga' + '<br>Tingkat Keparahan : ' + kabupaten.olahraga)
+        }
+        if (kabupaten.kecelakaan > 0) {
+          popUpText += ('<br>Kategori : Kecelakaan' + '<br>Tingkat Keparahan : ' + kabupaten.kecelakaan)
+        }
+        layer.bindPopup(popUpText);
     }
 
     function onEachFeature(feature, layer) {
-        const prov = provinsi.filter(p => p?.name == feature.properties.Provinsi)[0];
-        let bencana = 0,
-            kriminalitas = 0,
-            kesehatan = 0,
-            ekonomi = 0,
-            olahraga = 0,
-            kecelakaan = 0;
-        if (prov) {
-            bencana = prov.bencana;
-            kriminalitas = prov.kriminalitas;
-            kesehatan = prov.kesehatan;
-            ekonomi = prov.ekonomi;
-            olahraga = prov.olahraga;
-            kecelakaan = prov.kecelakaan;
+        var provinsi = hitungProvinsi(feature)
+        let popUpText = 'Provinsi : ' + feature.properties.Provinsi;
+        if (provinsi.bencana > 0) {
+          popUpText += ('<br>Kategori : Bencana' + '<br>Tingkat Keparahan : ' + provinsi.bencana)
         }
-        layer.bindPopup('Provinsi : ' + feature.properties.Provinsi + '<br>Bencana : ' + prov.bencana + '<br>Kriminalitas : ' + prov.kriminalitas + '<br>Kesehatan : ' +
-            prov.kesehatan + '<br>Ekonomi : ' + prov.ekonomi + '<br>Olahraga : ' + prov.olahraga + '<br>Kecelakaan : ' + prov.kecelakaan);
+        if (provinsi.kriminalitas > 0) {
+          popUpText += ('<br>Kategori : Kriminalitas' + '<br>Tingkat Keparahan : ' + provinsi.kriminalitas)
+        }
+        if (provinsi.kesehatan > 0) {
+          popUpText += ('<br>Kategori : kesehatan' + '<br>Tingkat Keparahan : ' + provinsi.kesehatan)
+        }
+        if (provinsi.ekonomi > 0) {
+          popUpText += ('<br>Kategori : Ekonomi' + '<br>Tingkat Keparahan : ' + provinsi.ekonomi)
+        }
+        if (provinsi.olahraga > 0) {
+          popUpText += ('<br>Kategori : Olahraga' + '<br>Tingkat Keparahan : ' + provinsi.olahraga)
+        }
+        if (provinsi.kecelakaan > 0) {
+          popUpText += ('<br>Kategori : Kecelakaan' + '<br>Tingkat Keparahan : ' + provinsi.kecelakaan)
+        }
+        layer.bindPopup(popUpText);
     }
 
     map.attributionControl.addAttribution('Tingkat Keparahan &copy; Peta Kabar</a>');

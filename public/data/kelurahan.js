@@ -41,7 +41,7 @@ var dataKecamatan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kecamatan": "Mumbulsari",
         "Kategori": "Bencana",
         "Jumlah": 106
@@ -58,7 +58,7 @@ var dataKecamatan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kecamatan": "Mumbulsari",
         "Kategori": "Kriminalitas",
         "Jumlah": 4
@@ -75,7 +75,7 @@ var dataKecamatan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kecamatan": "Mumbulsari",
         "Kategori": "Kesehatan",
         "Jumlah": 82
@@ -92,7 +92,7 @@ var dataKecamatan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kecamatan": "Mumbulsari",
         "Kategori": "Ekonomi",
         "Jumlah": 203
@@ -109,7 +109,7 @@ var dataKecamatan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kecamatan": "Mumbulsari",
         "Kategori": "Olahraga",
         "Jumlah": 86
@@ -126,7 +126,7 @@ var dataKecamatan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kecamatan": "Mumbulsari",
         "Kategori": "Kecelakaan",
         "Jumlah": 20
@@ -143,7 +143,7 @@ var dataKecamatan = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kecamatan": "Ambulu",
         "Kategori": "Bencana",
         "Jumlah": 86

@@ -39,7 +39,7 @@ var dataKabupaten = {
       "type": "Feature",
       "properties": {
         "Provinsi": "Jawa Timur",
-        "Kabupaten": "Jember",
+        "Kabupaten": "Kabupaten Jember",
         "Kategori" : "Bencana",
         "Jumlah": 92
       },
