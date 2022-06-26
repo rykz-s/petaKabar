@@ -18,8 +18,14 @@ Route::get('/', function () {
     return view('pane');
 });
 
+Route::get('/tabel', function () {
+    return view('tabel');
+});
+
 // Route::get('/nopane', function () {
 //     return view('nopane');
 // });
 
 Route::get('/nopane', [PetaController::class, 'index']);
+Route::get('/tabel', [TabelController::class, 'index']);
+
