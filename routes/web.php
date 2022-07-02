@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetaController;
+use App\Http\Controllers\TabelController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,9 @@ Route::get('/', function () {
     return view('pane');
 });
 
-Route::get('/tabel', function () {
-    return view('tabel');
-});
+// Route::get('/tabel', function () {
+//     return view('tabel');
+// });
 
 // Route::get('/nopane', function () {
 //     return view('nopane');
@@ -28,4 +30,6 @@ Route::get('/tabel', function () {
 
 Route::get('/nopane', [PetaController::class, 'index']);
 Route::get('/tabel', [TabelController::class, 'index']);
+
+// Route::get('/tabel', [TabelController::class, 'index']);
 

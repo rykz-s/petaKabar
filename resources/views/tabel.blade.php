@@ -29,32 +29,32 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example2" class="table table-bordered table-hover">
+                    <table id="example1" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>No</th> <!-- column 1 -->
                                 <th>Kategori</th><!-- column 2 -->
                                 <th>Kejadian</th> <!-- column 34567 -->
+                                <th>Waktu Berita</th>
+                                <th>Orang Terlibat</th>
                                 <th>Provinsi</th> <!-- column 891011 -->
                                 <th>Kabupaten</th>
                                 <th>Kecamatan</th>
                                 <th>Tingkat Keparahan</th>
-                                <th>Ikon</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- -->
-                            <tr>
-                            <td>1</td>
-                            <td>Bencana</td>
-                            <td>Gempa bumi</td>
-                            <td>Jawa Timur</td>
-                            <td>Kabupaten Jember</td>
-                            <td>Mumbulsari</td>   
-                            <td>Parah</td>   
-                            <td>Ikon</td>
+                            @foreach($response as $respons)
+                            <tr style="text-transform: capitalize">
+                                <td>{{$respons['kategori']}}</td>
+                                <td>{{$respons['nama']}}</td>
+                                <td>{{$respons['waktu']}}</td>
+                                <td>{{$respons['orang_terlibat']}}</td>
+                                <td>{{$respons['provinsi']}}</td>
+                                <td>{{$respons['kabupaten']}}</td>   
+                                <td>{{$respons['kecamatan']}}</td>   
+                                <td>{{$respons['tingkat_keparahan']}}</td>
                             </tr>
-                            <!--  -->
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -84,7 +84,7 @@
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({
             "paging": true,
