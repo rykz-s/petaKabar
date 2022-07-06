@@ -37,7 +37,7 @@
 <script src="{{ asset('data/kecamatan.js')}}"></script>
 
 <script>
-    var map = L.map("map").setView([-7.460517719883772, 112.73071289062499], 6);
+    var map = L.map("map").setView([-3.0966358718415505, 118.21289062499999], 6);
 
     var tiles = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
         maxZoom: 15,
