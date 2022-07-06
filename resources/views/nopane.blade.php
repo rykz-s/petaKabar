@@ -253,92 +253,6 @@
 
     var markersKecamatan = new L.FeatureGroup();
     markersKecamatan.addLayer(geojson3);
-    // var geojson3 = L.geoJson(dataKecamatan, {
-    //     pointToLayer: function(feature, latlng) {
-    //         let icon;
-    //         if (feature.properties.Kategori == "Bencana" && feature.properties.Jumlah < 50) {
-    //             icon = L.marker(latlng, {
-    //                 icon: bencanaT
-    //             });
-    //         } else if (feature.properties.Kategori == "Bencana" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: bencanaS
-    //             });
-    //         } else if (feature.properties.Kategori == "Bencana" && feature.properties.Jumlah > 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: bencanaP
-    //             });
-    //         } else if (feature.properties.Kategori == "Kriminalitas" && feature.properties.Jumlah < 50) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kriminalT
-    //             });
-    //         } else if (feature.properties.Kategori == "Kriminalitas" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kriminalS
-    //             });
-    //         } else if (feature.properties.Kategori == "Kriminalitas" && feature.properties.Jumlah > 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kriminalP
-    //             });
-    //         } else if (feature.properties.Kategori == "Kesehatan" && feature.properties.Jumlah < 50) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kesehatanT
-    //             });
-    //         } else if (feature.properties.Kategori == "Kesehatan" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kesehatanS
-    //             });
-    //         } else if (feature.properties.Kategori == "Kesehatan" && feature.properties.Jumlah > 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kesehatanP
-    //             });
-    //         } else if (feature.properties.Kategori == "Ekonomi" && feature.properties.Jumlah < 50) {
-    //             icon = L.marker(latlng, {
-    //                 icon: ekonomiT
-    //             });
-    //         } else if (feature.properties.Kategori == "Ekonomi" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: ekonomiS
-    //             });
-    //         } else if (feature.properties.Kategori == "Ekonomi" && feature.properties.Jumlah > 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: ekonomiP
-    //             });
-    //         } else if (feature.properties.Kategori == "Olahraga" && feature.properties.Jumlah < 50) {
-    //             icon = L.marker(latlng, {
-    //                 icon: olahragaT
-    //             });
-    //         } else if (feature.properties.Kategori == "Olahraga" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: olahragaS
-    //             });
-    //         } else if (feature.properties.Kategori == "Olahraga" && feature.properties.Jumlah > 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: olahragaP
-    //             });
-    //         } else if (feature.properties.Kategori == "Kecelakaan" && feature.properties.Jumlah < 50) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kecelakaanT
-    //             });
-    //         } else if (feature.properties.Kategori == "Kecelakaan" && feature.properties.Jumlah > 50 && feature.properties.Jumlah < 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kecelakaanS
-    //             });
-    //         } else if (feature.properties.Kategori == "Kecelakaan" && feature.properties.Jumlah > 100) {
-    //             icon = L.marker(latlng, {
-    //                 icon: kecelakaanP
-    //             });
-    //         }
-    //         return icon
-    //     },
-    //     style: {
-    //         opacity: 0,
-    //         fillOpacity: 0
-    //     },
-    //     onEachFeature: onEachFeature3
-    // });
-
-
 
     //kabupaten
     var geojson2 = L.geoJson(dataKabupaten, {
@@ -346,7 +260,12 @@
             opacity: 0,
             fillOpacity: 0
         },
-        onEachFeature: onEachFeature2
+        onEachFeature: onEachFeature2,
+        filter: function(feature){
+            if(beritaKabupaten.filter(k => k?.kabupaten.toLowerCase() == feature.properties.kabupaten.toLowerCase()).length > 0){
+                return true
+            }  
+        }
     });
     var markersKabupaten = new L.FeatureGroup();
     markersKabupaten.addLayer(geojson2);
@@ -498,37 +417,171 @@
             return
         }
         let popUpText = 'Kecamatan : ' + feature.properties.kecamatan;
-        if (kecamatan.kategori.bencana) {
-            popUpText += ('<br><br>Kategori : Bencana')
-            for(const [key, value] of Object.entries(kecamatan.kategori.bencana.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-                console.log(key);
-                console.log(value);
-            }
-        }if (kecamatan.kategori.kriminalitas) {
-            popUpText += ('<br><br>Kategori : Kriminalitas')
-            for(const [key, value] of Object.entries(kecamatan.kategori.kriminalitas.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kecamatan.kategori.kesehatan) {
-            popUpText += ('<br><br>Kategori : Kesehatan')
-            for(const [key, value] of Object.entries(kecamatan.kategori.kesehatan.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kecamatan.kategori.ekonomi) {
-            popUpText += ('<br><br>Kategori : Ekonomi')
-            for(const [key, value] of Object.entries(kecamatan.kategori.ekonomi.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kecamatan.kategori.kecelakaan) {
-            popUpText += ('<br><br>Kategori : kecelakaan')
-            for(const [key, value] of Object.entries(kecamatan.kategori.kecelakaan.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kecamatan.kategori.olahraga) {
-            popUpText += ('<br><br>Kategori : Olahraga')
-            for(const [key, value] of Object.entries(kecamatan.kategori.olahraga.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
+        if(kecamatan){  
+            if (kecamatan.kategori.bencana) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kecamatan.kategori.bencana.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/bencana_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/bencana_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/bencana_t.png')}}">`
+                }
+                popUpText += (' <b>Bencana</b><br>')
+                popUpText += beritaText
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                
+            }if (kecamatan.kategori.kriminalitas) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kecamatan.kategori.kriminalitas.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
+                }
+                popUpText += (' <b>Kriminalitas</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+                
+            }if (kecamatan.kategori.kesehatan) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kecamatan.kategori.kesehatan.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kesehatan_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kesehatan_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kesehatan_t.png')}}">`
+                }
+                popUpText += (' <b>Kesehatan</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+            }if (kecamatan.kategori.ekonomi) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kecamatan.kategori.ekonomi.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/ekonomi_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/ekonomi_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/ekonomi_t.png')}}">`
+                }
+                popUpText += (' <b>Ekonomi</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+            }if (kecamatan.kategori.kecelakaan) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kecamatan.kategori.kecelakaan.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_t.png')}}">`
+                }
+                popUpText += (' <b>Kecelakaan</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+            }if (kecamatan.kategori.olahraga) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kecamatan.kategori.olahraga.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/olahraga_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/olahraga_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/olahraga_t.png')}}">`
+                }
+                popUpText += (' <b>Olahraga</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
             }
         }
         layer.bindPopup(popUpText);
@@ -543,37 +596,171 @@
             return
         }
         let popUpText = 'Kabupaten : ' + feature.properties.kabupaten;
-        if (kabupaten.kategori.bencana) {
-            popUpText += ('<br><br>Kategori : Bencana')
-            for(const [key, value] of Object.entries(kabupaten.kategori.bencana.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-                console.log(key);
-                console.log(value);
-            }
-        }if (kabupaten.kategori.kriminalitas) {
-            popUpText += ('<br><br>Kategori : Kriminalitas')
-            for(const [key, value] of Object.entries(kabupaten.kategori.kriminalitas.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kabupaten.kategori.kesehatan) {
-            popUpText += ('<br><br>Kategori : Kesehatan')
-            for(const [key, value] of Object.entries(kabupaten.kategori.kesehatan.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kabupaten.kategori.ekonomi) {
-            popUpText += ('<br><br>Kategori : Ekonomi')
-            for(const [key, value] of Object.entries(kabupaten.kategori.ekonomi.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kabupaten.kategori.kecelakaan) {
-            popUpText += ('<br><br>Kategori : kecelakaan')
-            for(const [key, value] of Object.entries(kabupaten.kategori.kecelakaan.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
-            }
-        }if (kabupaten.kategori.olahraga) {
-            popUpText += ('<br><br>Kategori : Olahraga')
-            for(const [key, value] of Object.entries(kabupaten.kategori.olahraga.keparahan)){
-                popUpText += ('<br>Tingkat Keparahan : ' + key + '<br>Total Keparahan : ' + value)
+        if(kabupaten){  
+            if (kabupaten.kategori.bencana) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kabupaten.kategori.bencana.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/bencana_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/bencana_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/bencana_t.png')}}">`
+                }
+                popUpText += (' <b>Bencana</b><br>')
+                popUpText += beritaText
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                
+            }if (kabupaten.kategori.kriminalitas) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kabupaten.kategori.kriminalitas.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
+                }
+                popUpText += (' <b>Kriminalitas</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+                
+            }if (kabupaten.kategori.kesehatan) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kabupaten.kategori.kesehatan.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kesehatan_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kesehatan_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kesehatan_t.png')}}">`
+                }
+                popUpText += (' <b>Kesehatan</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+            }if (kabupaten.kategori.ekonomi) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kabupaten.kategori.ekonomi.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/ekonomi_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/ekonomi_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/ekonomi_t.png')}}">`
+                }
+                popUpText += (' <b>Ekonomi</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+            }if (kabupaten.kategori.kecelakaan) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kabupaten.kategori.kecelakaan.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_t.png')}}">`
+                }
+                popUpText += (' <b>Kecelakaan</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
+            }if (kabupaten.kategori.olahraga) {
+                let icon = "", iconValue = 0, beritaText = "";
+                for(const [key, value] of Object.entries(kabupaten.kategori.olahraga.keparahan)){
+                    if(value > iconValue){
+                        icon = key;
+                        iconValue = value;
+                    } else if(value == iconValue){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }else if(icon == "rendah" && key == "sedang"){
+                            icon = key;
+                            // console.log(key, iconValue);
+                        }
+                    }
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
+                }
+                if(icon == "parah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/olahraga_p.png')}}">`
+                } else if(icon == "sedang"){
+                    popUpText += `<br><br><img src="{{ asset('icons/olahraga_s.png')}}">`
+                }else if(icon =="rendah"){
+                    popUpText += `<br><br><img src="{{ asset('icons/olahraga_t.png')}}">`
+                }
+                popUpText += (' <b>Olahraga</b><br>')
+                popUpText += beritaText
+                popUpText += ('link<br>')
             }
         }
         layer.bindPopup(popUpText);
@@ -727,21 +914,21 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["nasional", "kota/provinsi"].includes(icon) && key == "internasional"){
                             icon = key;
                             // console.log(key, iconValue);
-                        }else if(icon == "rendah" && key == "sedang"){
+                        }else if(icon == "kota/provinsi" && key == "nasional"){
                             icon = key;
                             // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "internasional"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_p.png')}}">`
-                } else if(icon == "sedang"){
+                } else if(icon == "nasional"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_s.png')}}">`
-                }else if(icon =="rendah"){
+                }else if(icon =="kota/provinsi"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_t.png')}}">`
                 }
                 popUpText += (' <b>Olahraga</b><br>')

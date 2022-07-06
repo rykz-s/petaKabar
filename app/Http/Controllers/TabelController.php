@@ -9,7 +9,7 @@ class TabelController extends Controller
 {
     public function index(Request $request)
     {
-        $response = Http::accept('application/json')->get('https://787ad203-77dc-49de-9f3c-e6ad11e820b9.mock.pstmn.io/get');
+        $response = Http::accept('application/json')->get('https://f1f8ff16-4f2d-48e6-a9cc-d2a941058e62.mock.pstmn.io/get');
         if (request('kategori')) {
             $response->where('name', 'Like', '%' . request('kategori') . '%');
         }

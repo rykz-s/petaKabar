@@ -25,7 +25,7 @@ var dataProvinsi = {
 { "type": "Feature", "properties": { "provinsi": "Maluku Utara", "x": 127.835374, "y": 0.687936 }, "geometry": { "type": "Point", "coordinates": [ 127.835374, 0.687936 ] } },
 { "type": "Feature", "properties": { "provinsi": "Nusa Tenggara Barat", "x": 117.355817, "y": -8.602727 }, "geometry": { "type": "Point", "coordinates": [ 117.355817, -8.602727 ] } },
 { "type": "Feature", "properties": { "provinsi": "Nusa Tenggara Timur", "x": 121.059451, "y": -8.573584 }, "geometry": { "type": "Point", "coordinates": [ 121.059451, -8.573584 ] } },
-{ "type": "Feature", "properties": { "provinsi": "Papua", "x": 138.091944, "y": -6.1958031242000002 }, "geometry": { "type": "Point", "coordinates": [ 138.091944, -6.195803124236557 ] } },
+{ "type": "Feature", "properties": { "provinsi": "Papua", "x": 138.058985, "y": -4.8648419 }, "geometry": { "type": "Point", "coordinates": [ 138.058985, -4.8648419 ] } },
 { "type": "Feature", "properties": { "provinsi": "Papua Barat", "x": 133.133113, "y": -1.260555 }, "geometry": { "type": "Point", "coordinates": [ 133.133113, -1.260555 ] } },
 { "type": "Feature", "properties": { "provinsi": "Riau", "x": 101.704209, "y": 0.337989 }, "geometry": { "type": "Point", "coordinates": [ 101.704209, 0.337989 ] } },
 { "type": "Feature", "properties": { "provinsi": "Sulawesi Barat", "x": 119.158014, "y": -2.796998 }, "geometry": { "type": "Point", "coordinates": [ 119.158014, -2.796998 ] } },

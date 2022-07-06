@@ -46,7 +46,7 @@
                             @foreach($response as $respons)
                             <tr style="text-transform: capitalize">
                                 <td>{{$respons['kategori']}}</td>
-                                <td>{{$respons['nama']}}</td>
+                                <td>{{$respons['nama_kejadian']}}</td>
                                 <td>{{$respons['waktu']}}</td>
                                 <td>{{$respons['orang_terlibat']}}</td>
                                 <td>{{$respons['provinsi']}}</td>
