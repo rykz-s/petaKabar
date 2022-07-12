@@ -36,6 +36,6 @@ var dataProvinsi = {
 { "type": "Feature", "properties": { "provinsi": "Sumatera Barat", "x": 100.703520, "y": -0.665436 }, "geometry": { "type": "Point", "coordinates": [ 100.703520, -0.665436 ] } },
 { "type": "Feature", "properties": { "provinsi": "Sumatera Selatan", "x": 103.807032, "y": -3.229010 }, "geometry": { "type": "Point", "coordinates": [ 103.807032, -3.229010 ] } },
 { "type": "Feature", "properties": { "provinsi": "Sumatera Utara", "x": 99.485905, "y": 2.181241 }, "geometry": { "type": "Point", "coordinates": [ 99.485905, 2.181241 ] } },
-{ "type": "Feature", "properties": { "provinsi": "D I Yogyakarta", "x": 110.421288, "y": -7.847690 }, "geometry": { "type": "Point", "coordinates": [ 110.421288, -7.847690 ] } }
+{ "type": "Feature", "properties": { "provinsi": "Di Yogyakarta", "x": 110.421288, "y": -7.847690 }, "geometry": { "type": "Point", "coordinates": [ 110.421288, -7.847690 ] } }
 ]
 }

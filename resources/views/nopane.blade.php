@@ -31,7 +31,6 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/"></script>
 <script type="text/javascript" src="{{ asset('leaflet/js/leaflet.ajax.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('leaflet/js/leaflet.markercluster.js')}}"></script>
-<script src="{{ asset('data/data.js')}}"></script>
 <script src="{{ asset('data/kab.js')}}"></script>
 <script src="{{ asset('data/prov.js')}}"></script>
 <script src="{{ asset('data/kecamatan.js')}}"></script>
@@ -44,132 +43,6 @@
         minZoom: 6,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     }).addTo(map);
-
-    const bencanaP = L.icon({
-        iconUrl: "{{ asset('icons/bencana_p.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const bencanaS = L.icon({
-        iconUrl: "{{ asset('icons/bencana_s.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const bencanaT = L.icon({
-        iconUrl: "{{ asset('icons/bencana_t.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kriminalP = L.icon({
-        iconUrl: "{{ asset('icons/kriminal_p.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kriminalS = L.icon({
-        iconUrl: "{{ asset('icons/kriminal_s.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kriminalT = L.icon({
-        iconUrl: "{{ asset('icons/kriminal_t.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kesehatanT = L.icon({
-        iconUrl: "{{ asset('icons/kesehatan_t.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kesehatanS = L.icon({
-        iconUrl: "{{ asset('icons/kesehatan_s.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kesehatanP = L.icon({
-        iconUrl: "{{ asset('icons/kesehatan_p.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const ekonomiT = L.icon({
-        iconUrl: "{{ asset('icons/ekonomi_t.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const ekonomiS = L.icon({
-        iconUrl: "{{ asset('icons/ekonomi_s.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const ekonomiP = L.icon({
-        iconUrl: "{{ asset('icons/ekonomi_p.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const olahragaT = L.icon({
-        iconUrl: "{{ asset('icons/olahraga_t.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const olahragaS = L.icon({
-        iconUrl: "{{ asset('icons/olahraga_s.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const olahragaP = L.icon({
-        iconUrl: "{{ asset('icons/olahraga_p.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kecelakaanT = L.icon({
-        iconUrl: "{{ asset('icons/kecelakaan_t.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kecelakaanS = L.icon({
-        iconUrl: "{{ asset('icons/kecelakaan_s.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const kecelakaanP = L.icon({
-        iconUrl: "{{ asset('icons/kecelakaan_p.png')}}",
-        iconSize: [40, 40], // size of the icon
-        iconAnchor: [2, 2], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -2] // point from which the popup should open relative to the iconAnchor
-    });
 
     var dataApi = {!! json_encode($response) !!}
     console.log(dataApi);
@@ -267,8 +140,35 @@
             }  
         }
     });
+    var geojson2MarkerOptions = {
+            radius: 20,
+            fillColor: "#ff7800",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7
+        };
+        
+
+    var geojson2Circle = L.geoJson(dataKabupaten, {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojson2MarkerOptions);
+        },
+        filter: function(feature){
+            if(beritaKabupaten.filter(k => k?.kabupaten.toLowerCase() == feature.properties.kabupaten.toLowerCase()).length > 0){
+                return true
+            }  
+        }
+        // onEachFeature: onEachFeature
+    }).addTo(map);
+
     var markersKabupaten = new L.FeatureGroup();
+    var markersKabupatenCircle = new L.FeatureGroup();
+
     markersKabupaten.addLayer(geojson2);
+    markersKabupatenCircle.on('click', function(e) {
+        map.flyTo(e.latlng, 12);      
+    })
+    markersKabupatenCircle.addLayer(geojson2Circle);
 
     //provinsi
     var geojson = L.geoJson(dataProvinsi, {
@@ -279,26 +179,65 @@
         onEachFeature: onEachFeature
     }).addTo(map);
 
+    var geojsonMarkerOptions = {
+            radius: 20,
+            fillColor: "#07C0FF",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.55
+        };
+        
+
+    var geojsonCircle = L.geoJson(dataProvinsi, {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
+        }
+        // onEachFeature: onEachFeature
+    }).addTo(map);
+    
+
     var markersProvinsi = new L.FeatureGroup();
+    var markersProvinsiCircle = new L.FeatureGroup();
+
     markersProvinsi.addLayer(geojson);
+    markersProvinsiCircle.on('click', function(e) {
+        map.flyTo(e.latlng, 10);      
+    })
+    markersProvinsiCircle.addLayer(geojsonCircle);
+    
+    // var circle = L.circle([-3.0966358718415505, 118.21289062499999], {
+    //         color: 'red',
+    //         fillColor: '#f03',
+    //         fillOpacity: 0.5,
+    //         radius: 5000
+    //     }).addTo(map);
+    // console.log(circle);
+    // circle.bindPopup("tes");
+
 
     map.on('zoomend', function(e) {
         var zoomLevel = map.getZoom();
-        if (zoomLevel > 5 && zoomLevel < 9) {
+        if (zoomLevel > 5 && zoomLevel < 10) {
             map.addLayer(markersProvinsi);
-            // console.log("1");
+            map.addLayer(geojsonCircle);
+            // console.log(geojsonCircle);
         } else {
             map.removeLayer(markersProvinsi);
+            map.removeLayer(geojsonCircle);
             // console.log("2");
         }
-        if (zoomLevel > 8 && zoomLevel < 13) {
+        if (zoomLevel > 9 && zoomLevel < 12) {
             map.addLayer(markersKabupaten);
+            map.addLayer(geojson2Circle);
+
             // console.log("3");
         } else {
             map.removeLayer(markersKabupaten);
+            map.removeLayer(geojson2Circle);
+
             // console.log("4");
         }
-        if (zoomLevel > 12) {
+        if (zoomLevel > 11) {
             map.addLayer(markersKecamatan);
             // console.log("3");
         } else {
@@ -307,109 +246,6 @@
         }
         console.log(zoomLevel);
     });
-
-    function hitungKabupaten(feature) {
-        const kabupatens = dataApi.filter(k => k?.kabupaten.toLowerCase() == feature.properties.kabupaten.toLowerCase())
-        let bencana = 0,
-            kriminalitas = 0,
-            kesehatan = 0,
-            ekonomi = 0,
-            olahraga = 0,
-            kecelakaan = 0;
-        kabupatens.forEach(k => {
-        if (k.kategori.toLowerCase() == "bencana") {
-            bencana += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kriminalitas") {
-            kriminalitas += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kesehatan") {
-            kesehatan += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "ekonomi") {
-            ekonomi += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "olahraga") {
-            olahraga += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kecelakaan") {
-            kecelakaan += k.tingkat_keparahan;
-        }
-      })
-      return {
-        bencana: bencana,
-        kriminalitas: kriminalitas,
-        kesehatan: kesehatan,
-        ekonomi: ekonomi,
-        olahraga: olahraga,
-        kecelakaan: kecelakaan
-      };
-    }
-
-    function hitungProvinsi(feature) {
-        const provinsis = dataApi.filter(p => p?.provinsi.toLowerCase() == feature.properties.provinsi.toLowerCase())
-    let bencana = 0,
-        kriminalitas = 0,
-        kesehatan = 0,
-        ekonomi = 0,
-        olahraga = 0,
-        kecelakaan = 0;
-    provinsis.forEach(k => {
-        if (k.kategori.toLowerCase() == "bencana") {
-            bencana += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kriminalitas") {
-            kriminalitas += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kesehatan") {
-            kesehatan += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "ekonomi") {
-            ekonomi += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "olahraga") {
-            olahraga += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kecelakaan") {
-            kecelakaan += k.tingkat_keparahan;
-        }
-    })
-    return {
-        bencana: bencana,
-        kriminalitas: kriminalitas,
-        kesehatan: kesehatan,
-        ekonomi: ekonomi,
-        olahraga: olahraga,
-        kecelakaan: kecelakaan
-    };
-    }
-
-    function hitungKecamatan(feature){
-    const kecamatans = dataApi.filter(k => k?.kecamatan.toLowerCase() == feature.properties.kecamatan.toLowerCase())
-    let bencana = 0,
-        kriminalitas = 0,
-        kesehatan = 0,
-        ekonomi = 0,
-        olahraga = 0,
-        kecelakaan = 0;
-    kecamatans.forEach(k => {
-        if (k.kategori.toLowerCase() == "bencana") {
-            bencana += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kriminalitas") {
-            kriminalitas += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kesehatan") {
-            kesehatan += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "ekonomi") {
-            ekonomi += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "olahraga") {
-            olahraga += k.tingkat_keparahan;
-        } else if (k.kategori.toLowerCase() == "kecelakaan") {
-            kecelakaan += k.tingkat_keparahan;
-        }
-    })
-    return {
-        bencana: bencana,
-        kriminalitas: kriminalitas,
-        kesehatan: kesehatan,
-        ekonomi: ekonomi,
-        olahraga: olahraga,
-        kecelakaan: kecelakaan
-    };
-    }
-
-    function hapusMarker(){
-        
-    }
 
     function onEachFeature3(feature, layer) {
         var kecamatan = beritaKecamatan.filter(k => k?.kecamatan.toLowerCase() == feature.properties.kecamatan.toLowerCase())[0]; 
@@ -587,8 +423,8 @@
         layer.bindPopup(popUpText);
     }
 
-    console.log(geojson3);
-    console.log(markersKecamatan);
+    // console.log(geojson3);
+    // console.log(markersKecamatan);
 
     function onEachFeature2(feature, layer) {
         var kabupaten = beritaKabupaten.filter(k => k?.kabupaten.toLowerCase() == feature.properties.kabupaten.toLowerCase())[0]; 

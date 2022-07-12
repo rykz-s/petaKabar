@@ -130,3 +130,106 @@
         </div>
     </body>
 </html>
+
+function hitungKabupaten(feature) {
+        const kabupatens = dataApi.filter(k => k?.kabupaten.toLowerCase() == feature.properties.kabupaten.toLowerCase())
+        let bencana = 0,
+            kriminalitas = 0,
+            kesehatan = 0,
+            ekonomi = 0,
+            olahraga = 0,
+            kecelakaan = 0;
+        kabupatens.forEach(k => {
+        if (k.kategori.toLowerCase() == "bencana") {
+            bencana += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kriminalitas") {
+            kriminalitas += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kesehatan") {
+            kesehatan += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "ekonomi") {
+            ekonomi += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "olahraga") {
+            olahraga += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kecelakaan") {
+            kecelakaan += k.tingkat_keparahan;
+        }
+      })
+      return {
+        bencana: bencana,
+        kriminalitas: kriminalitas,
+        kesehatan: kesehatan,
+        ekonomi: ekonomi,
+        olahraga: olahraga,
+        kecelakaan: kecelakaan
+      };
+    }
+
+    function hitungProvinsi(feature) {
+        const provinsis = dataApi.filter(p => p?.provinsi.toLowerCase() == feature.properties.provinsi.toLowerCase())
+    let bencana = 0,
+        kriminalitas = 0,
+        kesehatan = 0,
+        ekonomi = 0,
+        olahraga = 0,
+        kecelakaan = 0;
+    provinsis.forEach(k => {
+        if (k.kategori.toLowerCase() == "bencana") {
+            bencana += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kriminalitas") {
+            kriminalitas += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kesehatan") {
+            kesehatan += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "ekonomi") {
+            ekonomi += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "olahraga") {
+            olahraga += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kecelakaan") {
+            kecelakaan += k.tingkat_keparahan;
+        }
+    })
+    return {
+        bencana: bencana,
+        kriminalitas: kriminalitas,
+        kesehatan: kesehatan,
+        ekonomi: ekonomi,
+        olahraga: olahraga,
+        kecelakaan: kecelakaan
+    };
+    }
+
+    function hitungKecamatan(feature){
+    const kecamatans = dataApi.filter(k => k?.kecamatan.toLowerCase() == feature.properties.kecamatan.toLowerCase())
+    let bencana = 0,
+        kriminalitas = 0,
+        kesehatan = 0,
+        ekonomi = 0,
+        olahraga = 0,
+        kecelakaan = 0;
+    kecamatans.forEach(k => {
+        if (k.kategori.toLowerCase() == "bencana") {
+            bencana += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kriminalitas") {
+            kriminalitas += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kesehatan") {
+            kesehatan += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "ekonomi") {
+            ekonomi += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "olahraga") {
+            olahraga += k.tingkat_keparahan;
+        } else if (k.kategori.toLowerCase() == "kecelakaan") {
+            kecelakaan += k.tingkat_keparahan;
+        }
+    })
+    return {
+        bencana: bencana,
+        kriminalitas: kriminalitas,
+        kesehatan: kesehatan,
+        ekonomi: ekonomi,
+        olahraga: olahraga,
+        kecelakaan: kecelakaan
+    };
+    }
+
+    function hapusMarker(){
+        
+    }
