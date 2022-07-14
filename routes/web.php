@@ -16,9 +16,9 @@ use App\Http\Controllers\TabelController;
 |
 */
 
-Route::get('/', function () {
-    return view('pane');
-});
+// Route::get('/', function () {
+//     return view('pane');
+// });
 
 // Route::get('/tabel', function () {
 //     return view('tabel');
@@ -28,7 +28,7 @@ Route::get('/', function () {
 //     return view('nopane');
 // });
 
-Route::get('/nopane', [PetaController::class, 'index']);
+Route::get('/', [PetaController::class, 'index']);
 Route::get('/tabel', [TabelController::class, 'index']);
 
 // Route::get('/tabel', [TabelController::class, 'index']);

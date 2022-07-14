@@ -20,9 +20,8 @@
 <body>
 
     <div id="map" style="width: 100%;">
-        <button id="refreshButton">
-            <!-- <img src="{{ asset('icons/bencana_p.png')}}"> -->
-            Scrap!
+        <button id="refreshButton" >
+            <p style="color: white;">Ambil Data Baru</p>
         </button>
     </div>
 
@@ -39,13 +38,13 @@
     var map = L.map("map").setView([-3.0966358718415505, 118.21289062499999], 6);
 
     var tiles = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 15,
+        maxZoom: 12,
         minZoom: 6,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     }).addTo(map);
 
     var dataApi = {!! json_encode($response) !!}
-    console.log(dataApi);
+    // console.log(dataApi);
 
     let kabupaten = [],
         provinsi = [];
@@ -53,62 +52,65 @@
     function hitungBerita(levelAdministrasi){
         var helper = {};
         var result = dataApi.reduce(function(r, o) {
-        var key;
-        if(levelAdministrasi == "kecamatan" && o.kecamatan && o.kecamatan != ""){
-            key = o.kecamatan;
-        } else if(levelAdministrasi == "kabupaten" && o.kabupaten && o.kabupaten != ""){
-            key =  o.kabupaten ;
-        } else if(levelAdministrasi == "provinsi" && o.provinsi && o.provinsi != ""){
-            key = o.provinsi;
-        } else {
-            return r;
-        }
-        if(!helper[key]) {
-            helper[key] = {
-                kategori: {},
-            };
-        if (levelAdministrasi == 'provinsi'){
-            helper[key].provinsi = o.provinsi
-        } else if (levelAdministrasi == 'kabupaten'){
-            helper[key].kabupaten = o.kabupaten
-            helper[key].provinsi = o.provinsi
-        } else if (levelAdministrasi == 'kecamatan'){
-            helper[key].kecamatan = o.kecamatan
-            helper[key].kabupaten = o.kabupaten
-            helper[key].provinsi = o.provinsi
-        }
-        helper[key].kategori[o.kategori] = {
-            keparahan: {}
-        }
-        helper[key].kategori[o.kategori].keparahan[o.tingkat_keparahan] = 1
-        r.push(helper[key]);
-        } else {
-            if(o.kategori in helper[key].kategori){
-                if(!(o.tingkat_keparahan in helper[key].kategori[o.kategori].keparahan)){
-                    helper[key].kategori[o.kategori].keparahan[o.tingkat_keparahan] = 1
-                } else {
-                    helper[key].kategori[o.kategori].keparahan[o.tingkat_keparahan] += 1
+            var key;
+            if(levelAdministrasi == "kecamatan" && o.kecamatan && o.kecamatan != "-"){
+                key = o.kecamatan;
+                // console.log(o.kecamatan)
+            } else if(levelAdministrasi == "kabupaten" && o.kabupaten && o.kabupaten != "-"){
+                key =  o.kabupaten ;
+            } else if(levelAdministrasi == "provinsi" && o.provinsi && o.provinsi != "-"){
+                key = o.provinsi;
+            } else {
+                return r;
+            }
+            if(!helper[key]) {
+                helper[key] = {
+                    kategori: {},
+                };
+                if (levelAdministrasi == 'provinsi'){
+                    helper[key].provinsi = o.provinsi
+                } else if (levelAdministrasi == 'kabupaten'){
+                    helper[key].kabupaten = o.kabupaten
+                    helper[key].provinsi = o.provinsi
+                } else if (levelAdministrasi == 'kecamatan'){
+                    helper[key].kecamatan = o.kecamatan
+                    helper[key].kabupaten = o.kabupaten
+                    helper[key].provinsi = o.provinsi
                 }
-                } else {
-                    helper[key].kategori[o.kategori] = {
+                helper[key].kategori[o.kategori] = {
                     keparahan: {}
                 }
                 helper[key].kategori[o.kategori].keparahan[o.tingkat_keparahan] = 1
+                r.push(helper[key]);
+            } else {
+                if(o.kategori in helper[key].kategori){
+                    if(!(o.tingkat_keparahan in helper[key].kategori[o.kategori].keparahan)){
+                        helper[key].kategori[o.kategori].keparahan[o.tingkat_keparahan] = 1
+                    } else {
+                        helper[key].kategori[o.kategori].keparahan[o.tingkat_keparahan] += 1
+                    }
+                } else {
+                    helper[key].kategori[o.kategori] = {
+                        keparahan: {}
+                    }
+                    helper[key].kategori[o.kategori].keparahan[o.tingkat_keparahan] = 1
+                }
+                if(["kabupaten", "kecamatan"].includes(levelAdministrasi) && o.provinsi != '-' && helper[key].provinsi == '-'){
+                    helper[key].provinsi = o.provinsi
+                }
+                if(levelAdministrasi == "kecamatan" && o.kabupaten != '-' && helper[key].kabupaten == '-'){
+                    helper[key].kabupaten = o.kabupaten
+                }
             }
-            if(["kabupaten", "kecamatan"].includes(levelAdministrasi) && o.provinsi != '' && helper[key].provinsi == ''){
-                helper[key].provinsi = o.provinsi
-            }
-            if(levelAdministrasi == "kecamatan" && o.kabupaten != '' && helper[key].kabupaten == ''){
-                helper[key].kabupaten = o.kabupaten
-            }
-        }
-        return r;
+            return r;
         }, []);
+        // console.log(result)
         return result;
     }
     var beritaKecamatan = hitungBerita("kecamatan");
     var beritaKabupaten = hitungBerita("kabupaten");
     var beritaProvinsi = hitungBerita("provinsi");
+    // console.log(beritaProvinsi)
 
     //kecamatan
     var geojson3 = L.geoJson(dataKecamatan, {
@@ -124,8 +126,29 @@
         }
     });
 
+    var geojson3MarkerOptions = {
+            radius: 20,
+            fillColor: "#F2DF3A",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7
+        };
+
+    var geojson3Circle = L.geoJson(dataKecamatan, {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojson3MarkerOptions);
+        },
+        filter: function(feature){
+            if(beritaKecamatan.filter(k => k?.kecamatan.toLowerCase() == feature.properties.kecamatan.toLowerCase()).length > 0){
+                return true
+            }  
+        }
+    }).addTo(map);
+
     var markersKecamatan = new L.FeatureGroup();
     markersKecamatan.addLayer(geojson3);
+    var markersKecamatanCircle = new L.FeatureGroup();
+    markersKecamatanCircle.addLayer(geojson3Circle);
 
     //kabupaten
     var geojson2 = L.geoJson(dataKabupaten, {
@@ -140,6 +163,7 @@
             }  
         }
     });
+
     var geojson2MarkerOptions = {
             radius: 20,
             fillColor: "#ff7800",
@@ -147,7 +171,6 @@
             opacity: 1,
             fillOpacity: 0.7
         };
-        
 
     var geojson2Circle = L.geoJson(dataKabupaten, {
             pointToLayer: function (feature, latlng) {
@@ -158,7 +181,6 @@
                 return true
             }  
         }
-        // onEachFeature: onEachFeature
     }).addTo(map);
 
     var markersKabupaten = new L.FeatureGroup();
@@ -166,7 +188,7 @@
 
     markersKabupaten.addLayer(geojson2);
     markersKabupatenCircle.on('click', function(e) {
-        map.flyTo(e.latlng, 12);      
+        map.flyTo(e.latlng, 11);      
     })
     markersKabupatenCircle.addLayer(geojson2Circle);
 
@@ -187,7 +209,6 @@
             fillOpacity: 0.55
         };
         
-
     var geojsonCircle = L.geoJson(dataProvinsi, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions);
@@ -195,7 +216,6 @@
         // onEachFeature: onEachFeature
     }).addTo(map);
     
-
     var markersProvinsi = new L.FeatureGroup();
     var markersProvinsiCircle = new L.FeatureGroup();
 
@@ -204,47 +224,32 @@
         map.flyTo(e.latlng, 10);      
     })
     markersProvinsiCircle.addLayer(geojsonCircle);
-    
-    // var circle = L.circle([-3.0966358718415505, 118.21289062499999], {
-    //         color: 'red',
-    //         fillColor: '#f03',
-    //         fillOpacity: 0.5,
-    //         radius: 5000
-    //     }).addTo(map);
-    // console.log(circle);
-    // circle.bindPopup("tes");
-
 
     map.on('zoomend', function(e) {
         var zoomLevel = map.getZoom();
         if (zoomLevel > 5 && zoomLevel < 10) {
             map.addLayer(markersProvinsi);
             map.addLayer(geojsonCircle);
-            // console.log(geojsonCircle);
         } else {
             map.removeLayer(markersProvinsi);
-            map.removeLayer(geojsonCircle);
-            // console.log("2");
+            map.removeLayer(geojsonCircle); 
+            map.removeLayer(geojson2Circle);
         }
-        if (zoomLevel > 9 && zoomLevel < 12) {
+        if (zoomLevel > 9 && zoomLevel < 11) {
             map.addLayer(markersKabupaten);
             map.addLayer(geojson2Circle);
-
-            // console.log("3");
         } else {
             map.removeLayer(markersKabupaten);
             map.removeLayer(geojson2Circle);
-
-            // console.log("4");
         }
-        if (zoomLevel > 11) {
+        if (zoomLevel > 10) {
             map.addLayer(markersKecamatan);
-            // console.log("3");
+            map.addLayer(geojson3Circle);
+
         } else {
             map.removeLayer(markersKecamatan);
-            // console.log("4");
+            map.removeLayer(geojson3Circle);
         }
-        console.log(zoomLevel);
     });
 
     function onEachFeature3(feature, layer) {
@@ -263,10 +268,8 @@
                     } else if(value == iconValue){
                         if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
@@ -291,10 +294,8 @@
                     } else if(value == iconValue){
                         if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
@@ -308,7 +309,7 @@
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
                 
             }if (kecamatan.kategori.kesehatan) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -319,10 +320,8 @@
                     } else if(value == iconValue){
                         if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key + ' : ' + value + ' berita<br>')
@@ -336,7 +335,7 @@
                 }
                 popUpText += (' <b>Kesehatan</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (kecamatan.kategori.ekonomi) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kecamatan.kategori.ekonomi.keparahan)){
@@ -346,10 +345,8 @@
                     } else if(value == iconValue){
                         if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
@@ -363,7 +360,7 @@
                 }
                 popUpText += (' <b>Ekonomi</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (kecamatan.kategori.kecelakaan) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kecamatan.kategori.kecelakaan.keparahan)){
@@ -373,10 +370,8 @@
                     } else if(value == iconValue){
                         if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
@@ -390,7 +385,7 @@
                 }
                 popUpText += (' <b>Kecelakaan</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (kecamatan.kategori.olahraga) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kecamatan.kategori.olahraga.keparahan)){
@@ -398,26 +393,24 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["nasional", "kota/provinsi"].includes(icon) && key == "internasional"){
                             icon = key;
-                            // console.log(key, iconValue);
-                        }else if(icon == "rendah" && key == "sedang"){
+                        }else if(icon == "kota/provinsi" && key == "nasional"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "internasional"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_p.png')}}">`
-                } else if(icon == "sedang"){
+                } else if(icon == "nasional"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_s.png')}}">`
-                }else if(icon =="rendah"){
+                }else if(icon =="kota/provinsi"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_t.png')}}">`
                 }
                 popUpText += (' <b>Olahraga</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }
         }
         layer.bindPopup(popUpText);
@@ -487,7 +480,7 @@
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
                 
             }if (kabupaten.kategori.kesehatan) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -515,7 +508,7 @@
                 }
                 popUpText += (' <b>Kesehatan</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (kabupaten.kategori.ekonomi) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kabupaten.kategori.ekonomi.keparahan)){
@@ -542,7 +535,7 @@
                 }
                 popUpText += (' <b>Ekonomi</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (kabupaten.kategori.kecelakaan) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kabupaten.kategori.kecelakaan.keparahan)){
@@ -569,7 +562,7 @@
                 }
                 popUpText += (' <b>Kecelakaan</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (kabupaten.kategori.olahraga) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kabupaten.kategori.olahraga.keparahan)){
@@ -577,26 +570,24 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["nasional", "kota/provinsi"].includes(icon) && key == "internasional"){
                             icon = key;
-                            // console.log(key, iconValue);
-                        }else if(icon == "rendah" && key == "sedang"){
+                        }else if(icon == "kota/provinsi" && key == "nasional"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "internasional"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_p.png')}}">`
-                } else if(icon == "sedang"){
+                } else if(icon == "nasional"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_s.png')}}">`
-                }else if(icon =="rendah"){
+                }else if(icon =="kota/provinsi"){
                     popUpText += `<br><br><img src="{{ asset('icons/olahraga_t.png')}}">`
                 }
                 popUpText += (' <b>Olahraga</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }
         }
         layer.bindPopup(popUpText);
@@ -660,7 +651,7 @@
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
                 
             }if (provinsi.kategori.kesehatan) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -688,7 +679,7 @@
                 }
                 popUpText += (' <b>Kesehatan</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (provinsi.kategori.ekonomi) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(provinsi.kategori.ekonomi.keparahan)){
@@ -715,7 +706,7 @@
                 }
                 popUpText += (' <b>Ekonomi</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (provinsi.kategori.kecelakaan) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(provinsi.kategori.kecelakaan.keparahan)){
@@ -742,7 +733,7 @@
                 }
                 popUpText += (' <b>Kecelakaan</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }if (provinsi.kategori.olahraga) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(provinsi.kategori.olahraga.keparahan)){
@@ -752,10 +743,8 @@
                     } else if(value == iconValue){
                         if(["nasional", "kota/provinsi"].includes(icon) && key == "internasional"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }else if(icon == "kota/provinsi" && key == "nasional"){
                             icon = key;
-                            // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
@@ -769,7 +758,7 @@
                 }
                 popUpText += (' <b>Olahraga</b><br>')
                 popUpText += beritaText
-                popUpText += ('link<br>')
+                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
             }
         }
         

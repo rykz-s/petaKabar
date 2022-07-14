@@ -7,21 +7,10 @@ use Illuminate\Support\Facades\Http;
 
 class PetaController extends Controller
 {
-    public function detail($id)
-    {
-        // $response = Http::get('https://ffc6a35e-8b7c-416a-96ba-9ca78bd6f895.mock.pstmn.io/get'. $id);
-        // $data['users'] = $response->json()["data"];
-        // return view('tabel', compact('response'));
-    }
-
     public function index(Request $request)
     {
-        // $on_page = is_null($request->get('page')) ? 1 : $request->get('page');
-        $response = Http::accept('application/json')->get('https://f1f8ff16-4f2d-48e6-a9cc-d2a941058e62.mock.pstmn.io/get');
+        $response = Http::accept('application/json')->get('https://e85fa493-3d3b-4c85-bafc-8365bf6ce3c9.mock.pstmn.io/get');
         $response = $response->json()["data"];
-        // $data['get'] = $response->json()['data'];
-        // $data['max_pages'] = $res->json()['total_pages'];
-        // dd($response["data"]);
         return view('nopane', compact('response'));
     }
 }
