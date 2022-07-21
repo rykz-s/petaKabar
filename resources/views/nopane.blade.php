@@ -143,7 +143,7 @@
                 return true
             }  
         }
-    }).addTo(map);
+    });
 
     var markersKecamatan = new L.FeatureGroup();
     markersKecamatan.addLayer(geojson3);
@@ -181,7 +181,7 @@
                 return true
             }  
         }
-    }).addTo(map);
+    });
 
     var markersKabupaten = new L.FeatureGroup();
     var markersKabupatenCircle = new L.FeatureGroup();
@@ -293,19 +293,19 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["Sedang", "Rendah"].includes(icon) && key == "Parah"){
                             icon = key;
-                        }else if(icon == "rendah" && key == "sedang"){
+                        }else if(icon == "Rendah" && key == "Sedang"){
                             icon = key;
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "Parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
-                } else if(icon == "sedang"){
+                } else if(icon == "Sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
-                }else if(icon =="rendah"){
+                }else if(icon =="Rendah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
@@ -462,21 +462,21 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["Sedang", "Rendah"].includes(icon) && key == "Parah"){
                             icon = key;
                             // console.log(key, iconValue);
-                        }else if(icon == "rendah" && key == "sedang"){
+                        }else if(icon == "Rendah" && key == "Sedang"){
                             icon = key;
                             // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "Parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
-                } else if(icon == "sedang"){
+                } else if(icon == "Sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
-                }else if(icon =="rendah"){
+                }else if(icon =="Rendah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
@@ -633,21 +633,21 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["Sedang", "Rendah"].includes(icon) && key == "Parah"){
                             icon = key;
                             // console.log(key, iconValue);
-                        }else if(icon == "rendah" && key == "sedang"){
+                        }else if(icon == "Rendah" && key == "Sedang"){
                             icon = key;
                             // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "Parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
-                } else if(icon == "sedang"){
+                } else if(icon == "Sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
-                }else if(icon =="rendah"){
+                }else if(icon =="Rendah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
@@ -669,7 +669,7 @@
                             // console.log(key, iconValue);
                         }
                     }
-                    beritaText += (key + ' : ' + value + ' berita<br>')
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
                 if(icon == "parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_p.png')}}">`
