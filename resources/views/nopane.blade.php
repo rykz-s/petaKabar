@@ -38,7 +38,7 @@
     var map = L.map("map").setView([-3.0966358718415505, 118.21289062499999], 6);
 
     var tiles = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 12,
+        maxZoom: 11,
         minZoom: 6,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     }).addTo(map);
@@ -221,13 +221,14 @@
 
     markersProvinsi.addLayer(geojson);
     markersProvinsiCircle.on('click', function(e) {
-        map.flyTo(e.latlng, 10);      
+        map.flyTo(e.latlng, 9);      
     })
     markersProvinsiCircle.addLayer(geojsonCircle);
 
     map.on('zoomend', function(e) {
         var zoomLevel = map.getZoom();
-        if (zoomLevel > 5 && zoomLevel < 10) {
+        console.log(zoomLevel);
+        if (zoomLevel > 5 && zoomLevel < 9) {
             map.addLayer(markersProvinsi);
             map.addLayer(geojsonCircle);
         } else {
@@ -235,7 +236,7 @@
             map.removeLayer(geojsonCircle); 
             map.removeLayer(geojson2Circle);
         }
-        if (zoomLevel > 9 && zoomLevel < 11) {
+        if (zoomLevel > 8 && zoomLevel < 11) {
             map.addLayer(markersKabupaten);
             map.addLayer(geojson2Circle);
         } else {
