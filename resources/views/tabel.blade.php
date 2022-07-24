@@ -22,7 +22,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Peta Kabar</h3>
+                    <h3 class="card-title">Detail Berita Peta Kabar</h3>
                     <div class="float-right">
                         <a class="btn btn-success" href="/nopane">Buka Peta!</a>
                     </div>
@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($response as $respons)
+                            @foreach($data as $respons)
                             <tr style="text-transform: capitalize">
                                 <td>{{$respons['kategori']}}</td>
                                 <td>{{$respons['nama_kejadian']}}</td>
@@ -65,16 +65,6 @@
 </div>
 <!-- /.container-fluid -->
 @endsection
-
-<!-- CSS tertentu jika ingin beda dari page yang lain -->
-@push('css')
-<style>
-    .btn-red {
-        background-color: red;
-        color: white;
-    }
-</style>
-@endpush
 
 <!-- JS tertentu jika ingin beda dari page yang lain -->
 @push('js')

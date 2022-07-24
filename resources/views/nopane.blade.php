@@ -23,6 +23,10 @@
         <button id="refreshButton" >
             <p style="color: white;">Ambil Data Baru</p>
         </button>
+        <button id="beritaButton" >
+            <!-- <p style="color: black;">Lihat Semua Berita!</p> -->
+            <a href="http://127.0.0.1:8000/tabel" style="text-decoration: none; color: black;">Lihat Semua Berita!</a>
+        </button>
     </div>
 
 </body>
@@ -284,7 +288,11 @@
                 }
                 popUpText += (' <b>Bencana</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kecamatan');
+                url.searchParams.append('daerah', kecamatan.kecamatan);
+                url.searchParams.append('kategori', 'bencana');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
                 
             }if (kecamatan.kategori.kriminalitas) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -293,24 +301,28 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["Sedang", "Rendah"].includes(icon) && key == "Parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
-                        }else if(icon == "Rendah" && key == "Sedang"){
+                        }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "Parah"){
+                if(icon == "parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
-                } else if(icon == "Sedang"){
+                } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
-                }else if(icon =="Rendah"){
+                }else if(icon =="rendah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kecamatan');
+                url.searchParams.append('daerah', kecamatan.kecamatan);
+                url.searchParams.append('kategori', 'kriminalitas');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
                 
             }if (kecamatan.kategori.kesehatan) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -336,7 +348,11 @@
                 }
                 popUpText += (' <b>Kesehatan</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kecamatan');
+                url.searchParams.append('daerah', kecamatan.kecamatan);
+                url.searchParams.append('kategori', 'kesehatan');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (kecamatan.kategori.ekonomi) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kecamatan.kategori.ekonomi.keparahan)){
@@ -361,7 +377,11 @@
                 }
                 popUpText += (' <b>Ekonomi</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kecamatan');
+                url.searchParams.append('daerah', kecamatan.kecamatan);
+                url.searchParams.append('kategori', 'ekonomi');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (kecamatan.kategori.kecelakaan) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kecamatan.kategori.kecelakaan.keparahan)){
@@ -386,7 +406,11 @@
                 }
                 popUpText += (' <b>Kecelakaan</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kecamatan');
+                url.searchParams.append('daerah', kecamatan.kecamatan);
+                url.searchParams.append('kategori', 'kecelakaan');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (kecamatan.kategori.olahraga) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kecamatan.kategori.olahraga.keparahan)){
@@ -411,7 +435,11 @@
                 }
                 popUpText += (' <b>Olahraga</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kecamatan');
+                url.searchParams.append('daerah', kecamatan.kecamatan);
+                url.searchParams.append('kategori', 'olahraga');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }
         }
         layer.bindPopup(popUpText);
@@ -453,7 +481,11 @@
                 }
                 popUpText += (' <b>Bencana</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kabupaten');
+                url.searchParams.append('daerah', kabupaten.kabupaten);
+                url.searchParams.append('kategori', 'bencana');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
                 
             }if (kabupaten.kategori.kriminalitas) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -462,26 +494,30 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["Sedang", "Rendah"].includes(icon) && key == "Parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
                             // console.log(key, iconValue);
-                        }else if(icon == "Rendah" && key == "Sedang"){
+                        }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
                             // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "Parah"){
+                if(icon == "parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
-                } else if(icon == "Sedang"){
+                } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
-                }else if(icon =="Rendah"){
+                }else if(icon =="rendah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kabupaten');
+                url.searchParams.append('daerah', kabupaten.kabupaten);
+                url.searchParams.append('kategori', 'kriminalitas');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
                 
             }if (kabupaten.kategori.kesehatan) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -498,7 +534,7 @@
                             // console.log(key, iconValue);
                         }
                     }
-                    beritaText += (key + ' : ' + value + ' berita<br>')
+                    beritaText += (key.charAt(0).toUpperCase() + key.slice(1) +  ' : ' + value + ' berita<br>')
                 }
                 if(icon == "parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_p.png')}}">`
@@ -509,7 +545,11 @@
                 }
                 popUpText += (' <b>Kesehatan</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kabupaten');
+                url.searchParams.append('daerah', kabupaten.kabupaten);
+                url.searchParams.append('kategori', 'kesehatan');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (kabupaten.kategori.ekonomi) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kabupaten.kategori.ekonomi.keparahan)){
@@ -536,7 +576,11 @@
                 }
                 popUpText += (' <b>Ekonomi</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kabupaten');
+                url.searchParams.append('daerah', kabupaten.kabupaten);
+                url.searchParams.append('kategori', 'ekonomi');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (kabupaten.kategori.kecelakaan) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kabupaten.kategori.kecelakaan.keparahan)){
@@ -563,7 +607,11 @@
                 }
                 popUpText += (' <b>Kecelakaan</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kabupaten');
+                url.searchParams.append('daerah', kabupaten.kabupaten);
+                url.searchParams.append('kategori', 'kecelakaan');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (kabupaten.kategori.olahraga) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(kabupaten.kategori.olahraga.keparahan)){
@@ -588,7 +636,11 @@
                 }
                 popUpText += (' <b>Olahraga</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'kabupaten');
+                url.searchParams.append('daerah', kabupaten.kabupaten);
+                url.searchParams.append('kategori', 'olahraga');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }
         }
         layer.bindPopup(popUpText);
@@ -624,7 +676,11 @@
                 }
                 popUpText += (' <b>Bencana</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'provinsi');
+                url.searchParams.append('daerah', provinsi.provinsi);
+                url.searchParams.append('kategori', 'bencana');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
                 
             }if (provinsi.kategori.kriminalitas) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -633,26 +689,30 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["Sedang", "Rendah"].includes(icon) && key == "Parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
                             icon = key;
                             // console.log(key, iconValue);
-                        }else if(icon == "Rendah" && key == "Sedang"){
+                        }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
                             // console.log(key, iconValue);
                         }
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "Parah"){
+                if(icon == "parah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
-                } else if(icon == "Sedang"){
+                } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
-                }else if(icon =="Rendah"){
+                }else if(icon =="rendah"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_t.png')}}">`
                 }
                 popUpText += (' <b>Kriminalitas</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'provinsi');
+                url.searchParams.append('daerah', provinsi.provinsi);
+                url.searchParams.append('kategori', 'kriminalitas');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
                 
             }if (provinsi.kategori.kesehatan) {
                 let icon = "", iconValue = 0, beritaText = "";
@@ -680,7 +740,11 @@
                 }
                 popUpText += (' <b>Kesehatan</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'provinsi');
+                url.searchParams.append('daerah', provinsi.provinsi);
+                url.searchParams.append('kategori', 'kesehatan');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (provinsi.kategori.ekonomi) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(provinsi.kategori.ekonomi.keparahan)){
@@ -707,7 +771,11 @@
                 }
                 popUpText += (' <b>Ekonomi</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'provinsi');
+                url.searchParams.append('daerah', provinsi.provinsi);
+                url.searchParams.append('kategori', 'ekonomi');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (provinsi.kategori.kecelakaan) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(provinsi.kategori.kecelakaan.keparahan)){
@@ -734,7 +802,11 @@
                 }
                 popUpText += (' <b>Kecelakaan</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'provinsi');
+                url.searchParams.append('daerah', provinsi.provinsi);
+                url.searchParams.append('kategori', 'kecelakaan');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }if (provinsi.kategori.olahraga) {
                 let icon = "", iconValue = 0, beritaText = "";
                 for(const [key, value] of Object.entries(provinsi.kategori.olahraga.keparahan)){
@@ -759,7 +831,11 @@
                 }
                 popUpText += (' <b>Olahraga</b><br>')
                 popUpText += beritaText
-                popUpText += ('<a href="http://127.0.0.1:8000/tabel">Detail Berita</a><br>')
+                let url = new URL('http://127.0.0.1:8000/tabel');
+                url.searchParams.append('tipe', 'provinsi');
+                url.searchParams.append('daerah', provinsi.provinsi);
+                url.searchParams.append('kategori', 'olahraga');
+                popUpText += (`<a href="${url.href}">Detail Berita</a><br>`)
             }
         }
         
