@@ -21,12 +21,12 @@
 
     <div id="map" style="width: 100%;">
         <button id="refreshButton" >
-            <p style="color: white;">Ambil Data Baru</p>
+            <!-- <p style="color: white;">Ambil Data Baru</p> -->
+            <a href="http://127.0.0.1:8000/tabel" style="text-decoration: none; color: #f9f9f9;">Lihat Semua Berita!</a>
         </button>
-        <button id="beritaButton" >
-            <!-- <p style="color: black;">Lihat Semua Berita!</p> -->
+        <!-- <button id="beritaButton" >
             <a href="http://127.0.0.1:8000/tabel" style="text-decoration: none; color: black;">Lihat Semua Berita!</a>
-        </button>
+        </button> -->
     </div>
 
 </body>
@@ -129,7 +129,6 @@
             }  
         }
     });
-
     var geojson3MarkerOptions = {
             radius: 20,
             fillColor: "#F2DF3A",
@@ -137,7 +136,6 @@
             opacity: 1,
             fillOpacity: 0.7
         };
-
     var geojson3Circle = L.geoJson(dataKecamatan, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojson3MarkerOptions);
@@ -148,7 +146,6 @@
             }  
         }
     });
-
     var markersKecamatan = new L.FeatureGroup();
     markersKecamatan.addLayer(geojson3);
     var markersKecamatanCircle = new L.FeatureGroup();
@@ -167,7 +164,6 @@
             }  
         }
     });
-
     var geojson2MarkerOptions = {
             radius: 20,
             fillColor: "#ff7800",
@@ -175,7 +171,6 @@
             opacity: 1,
             fillOpacity: 0.7
         };
-
     var geojson2Circle = L.geoJson(dataKabupaten, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojson2MarkerOptions);
@@ -186,10 +181,8 @@
             }  
         }
     });
-
     var markersKabupaten = new L.FeatureGroup();
     var markersKabupatenCircle = new L.FeatureGroup();
-
     markersKabupaten.addLayer(geojson2);
     markersKabupatenCircle.on('click', function(e) {
         map.flyTo(e.latlng, 11);      
@@ -271,7 +264,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
@@ -279,7 +272,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/bencana_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/bencana_s.png')}}">`
@@ -301,7 +294,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
@@ -309,7 +302,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
@@ -331,7 +324,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
@@ -339,7 +332,7 @@
                     }
                     beritaText += (key + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_s.png')}}">`
@@ -360,7 +353,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
@@ -368,7 +361,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/ekonomi_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/ekonomi_s.png')}}">`
@@ -389,7 +382,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                         }else if(icon == "rendah" && key == "sedang"){
                             icon = key;
@@ -397,7 +390,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_s.png')}}">`
@@ -462,7 +455,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -472,7 +465,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/bencana_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/bencana_s.png')}}">`
@@ -494,7 +487,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -504,7 +497,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
@@ -526,7 +519,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -536,7 +529,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) +  ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_s.png')}}">`
@@ -557,7 +550,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -567,7 +560,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/ekonomi_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/ekonomi_s.png')}}">`
@@ -588,7 +581,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -598,7 +591,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_s.png')}}">`
@@ -657,7 +650,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -667,7 +660,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/bencana_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/bencana_s.png')}}">`
@@ -689,7 +682,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -699,7 +692,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kriminal_s.png')}}">`
@@ -721,7 +714,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -731,7 +724,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kesehatan_s.png')}}">`
@@ -752,7 +745,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -762,7 +755,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/ekonomi_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/ekonomi_s.png')}}">`
@@ -783,7 +776,7 @@
                         icon = key;
                         iconValue = value;
                     } else if(value == iconValue){
-                        if(["sedang", "rendah"].includes(icon) && key == "parah"){
+                        if(["sedang", "rendah"].includes(icon) && key == "tinggi"){
                             icon = key;
                             // console.log(key, iconValue);
                         }else if(icon == "rendah" && key == "sedang"){
@@ -793,7 +786,7 @@
                     }
                     beritaText += (key.charAt(0).toUpperCase() + key.slice(1) + ' : ' + value + ' berita<br>')
                 }
-                if(icon == "parah"){
+                if(icon == "tinggi"){
                     popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_p.png')}}">`
                 } else if(icon == "sedang"){
                     popUpText += `<br><br><img src="{{ asset('icons/kecelakaan_s.png')}}">`

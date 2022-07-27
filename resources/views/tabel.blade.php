@@ -24,7 +24,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Detail Berita Peta Kabar</h3>
                     <div class="float-right">
-                        <a class="btn btn-success" href="/nopane">Buka Peta!</a>
+                        <a class="btn btn-success" href="/">Buka Peta!</a>
                     </div>
                 </div>
                 <!-- /.card-header -->
