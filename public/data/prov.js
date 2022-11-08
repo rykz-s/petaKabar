@@ -3,7 +3,7 @@ var dataProvinsi = {
 "name": "prov",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "provinsi": "Aceh", "x": 96.697740, "y": 4.768522 }, "geometry": { "type": "Point", "coordinates": [ 96.697740, 4.768522 ] } },
+{ "type": "Feature", "properties": { "provinsi": "Nanggroe Aceh Darussalam", "x": 96.697740, "y": 4.768522 }, "geometry": { "type": "Point", "coordinates": [ 96.697740, 4.768522 ] } },
 { "type": "Feature", "properties": { "provinsi": "Bali", "x": 115.203378, "y": -8.640065 }, "geometry": { "type": "Point", "coordinates": [ 115.203378, -8.640065 ] } },
 { "type": "Feature", "properties": { "provinsi": "Bangka Belitung", "x": 106.310641, "y": -2.699912 }, "geometry": { "type": "Point", "coordinates": [ 106.310641, -2.699912 ] } },
 { "type": "Feature", "properties": { "provinsi": "Banten", "x": 106.056709, "y": -6.379131 }, "geometry": { "type": "Point", "coordinates": [ 106.056709, -6.379131 ] } },

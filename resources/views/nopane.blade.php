@@ -225,7 +225,7 @@
     map.on('zoomend', function(e) {
         var zoomLevel = map.getZoom();
         console.log(zoomLevel);
-        if (zoomLevel > 5 && zoomLevel < 9) {
+        if (zoomLevel > 5 && zoomLevel < 7) {
             map.addLayer(markersProvinsi);
             map.addLayer(geojsonCircle);
         } else {
@@ -233,7 +233,7 @@
             map.removeLayer(geojsonCircle); 
             map.removeLayer(geojson2Circle);
         }
-        if (zoomLevel > 8 && zoomLevel < 11) {
+        if (zoomLevel > 6 && zoomLevel < 9) {
             map.addLayer(markersKabupaten);
             map.addLayer(geojson2Circle);
         } else {

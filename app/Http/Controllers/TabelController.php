@@ -14,7 +14,7 @@ class TabelController extends Controller
         $daerah = $request->query('daerah');
         $kategori = $request->query('kategori');
 
-        $response = Http::accept('application/json')->get('https://jsonblob.com/api/998502359789486080');
+        $response = Http::accept('application/json')->get('http://jsonblob.com/api/1039541677303545856');
         $response = $response->json()["data"];
         $data = [];
         if ($tipe != 'all' && in_array($tipe, $tipe_daerah)) {
